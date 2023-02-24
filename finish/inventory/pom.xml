@@ -39,12 +39,6 @@
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.opentelemetry/opentelemetry-opentracing-shim -->
-        <dependency>
-            <groupId>io.opentelemetry</groupId>
-            <artifactId>opentelemetry-opentracing-shim</artifactId>
-            <version>1.19.0-alpha</version>
-        </dependency>
         <dependency>
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-api</artifactId>

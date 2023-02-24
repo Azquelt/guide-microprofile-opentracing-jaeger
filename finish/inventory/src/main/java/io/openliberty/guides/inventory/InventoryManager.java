@@ -22,9 +22,9 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import io.openliberty.guides.inventory.client.SystemClient;
 import io.openliberty.guides.inventory.model.InventoryList;
 import io.openliberty.guides.inventory.model.SystemData;
-import io.opentracing.Scope;
-import io.opentracing.Span;
-import io.opentracing.Tracer;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.Tracer;
+import io.opentelemetry.context.Scope;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -57,15 +57,15 @@ public class InventoryManager {
         // tag::Add[]
         if (!systems.contains(system)) {
             // tag::addSpan[]
-            Span span = tracer.buildSpan("add() Span").start();
+            Span span = tracer.spanBuilder("add() Span").startSpan();
             // end::addSpan[]
             // tag::Try[]
-            try (Scope childScope = tracer.activateSpan(span)) {
+            try (Scope childScope = span.makeCurrent()) {
                 // tag::addToInvList[]
                 systems.add(system);
                 // end::addToInvList[]
             } finally {
-                span.finish();
+                span.end();
             }
             // end::Try[]
         }
