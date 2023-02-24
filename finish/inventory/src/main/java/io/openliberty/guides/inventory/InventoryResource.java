@@ -14,8 +14,6 @@ package io.openliberty.guides.inventory;
 
 import java.util.Properties;
 
-import org.eclipse.microprofile.opentracing.Traced;
-
 import io.openliberty.guides.inventory.model.InventoryList;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
@@ -52,9 +50,6 @@ public class InventoryResource {
     // end::getPropertiesForHost[]
 
     @GET
-    // tag::Traced-false[]
-    @Traced(false)
-    // end::Traced-false[]
     @Produces(MediaType.APPLICATION_JSON)
     // tag::listContents[]
     public InventoryList listContents() {

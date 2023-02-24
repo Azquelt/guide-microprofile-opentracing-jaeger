@@ -13,20 +13,20 @@
 package io.openliberty.guides.inventory;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
+
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
 import io.openliberty.guides.inventory.client.SystemClient;
 import io.openliberty.guides.inventory.model.InventoryList;
 import io.openliberty.guides.inventory.model.SystemData;
+import io.opentracing.Scope;
+import io.opentracing.Span;
+import io.opentracing.Tracer;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import java.util.List;
-import java.util.Collections;
-
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-import org.eclipse.microprofile.opentracing.Traced;
-import io.opentracing.Scope;
-import io.opentracing.Tracer;
-import io.opentracing.Span;
 
 @ApplicationScoped
 // tag::InventoryManager[]
@@ -72,9 +72,6 @@ public class InventoryManager {
         // end::Add[]
     }
 
-    // tag::Traced[]
-    @Traced(operationName = "InventoryManager.list")
-    // end::Traced[]
     // tag::list[]
     public InventoryList list() {
         return new InventoryList(systems);
